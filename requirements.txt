@@ -1,0 +1,17 @@
+tensorflow
+mtcnn~=0.1.1
+opencv-python~=4.5.5.62
+pymongo~=4.0.1
+dnspython
+werkzeug~=1.0.1
+flask~=1.1.2
+flask-pymongo
+flask-bootstrap
+flask-wtf
+wtforms~=3.0.1
+flask-login
+dash~=2.3.0
+
+keras~=2.7.0
+numpy~=1.18.5
+mongoengine~=0.24.1
