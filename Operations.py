@@ -1,7 +1,7 @@
 import pymongo
 from mongoengine import connection
 from mongoengine import connect, Document, disconnect
-from mongoengine.fields import StringField, DateTimeField, EmailField
+from mongoengine.fields import StringField, DateTimeField, EmailField, DictField, FloatField
 import datetime
 
 
@@ -50,6 +50,16 @@ class Employees(Document):
     db.close_connection()
 
 
+class Predictions(Document):
+    db = Database('predictions-write','hcLSaL51IP3VgRGH')
+    db.make_connection()
+
+    date = DateTimeField(default=datetime.date.today())
+    emp_id = StringField(required=True, unique=False, max_length=40, index=True)
+    emo_percentages = DictField()
+    stress_percentage = FloatField()
+
+    db.close_connection()
 # ------------------------------------------------------------------------------------------------------------
 
 
