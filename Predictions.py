@@ -40,3 +40,20 @@ def make_predictions(date, emp_id):
 
     return predictions
 # ----------------------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------------------------------
+def write_predictions(predictions):
+    db = Database('predictions-write', 'BJ6AUFlFu1SnJFKI')
+    db.make_connection()
+
+    pred = Predictions()
+    pred.date = predictions['date']
+    pred.emp_id = predictions['emp_id']
+    pred.emo_percentages = predictions['emo_percentages']
+    pred.stress_percentage = predictions['stress_percentage']
+    pred.save()
+
+    db.close_connection()
+
+    return 'predictions data updated.'
+# ----------------------------------------------------------------------------------------------------------------------
