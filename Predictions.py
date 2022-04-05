@@ -35,6 +35,7 @@ def make_predictions(date, emp_id):
     effective_emotions = emo_counts['Anger'] + emo_counts['Disgust'] + emo_counts['Fear'] + emo_counts['Sad']
     stress_percentage = (effective_emotions / all_emo_count) * 100.0
 
+    predictions['emo_counts'] = emo_counts
     predictions['emo_percentages'] = emo_percentages
     predictions['stress_percentage'] = stress_percentage
 

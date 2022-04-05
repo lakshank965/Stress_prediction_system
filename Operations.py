@@ -56,6 +56,7 @@ class Predictions(Document):
 
     date = DateTimeField(default=datetime.date.today())
     emp_id = StringField(required=True, unique=False, max_length=40, index=True)
+    emo_counts = DictField()
     emo_percentages = DictField()
     stress_percentage = FloatField()
 
