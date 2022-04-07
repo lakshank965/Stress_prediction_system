@@ -61,6 +61,18 @@ class Predictions(Document):
     stress_percentage = FloatField()
 
     db.close_connection()
+
+class DailyPredictions(Document):
+    db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
+    db.make_connection()
+
+    date = DateTimeField(default=datetime.date.today())
+    # date = StringField(required=True, unique=True)
+    all_emo_counts = DictField()
+    all_emo_percentages = DictField()
+    average_stress_percentage = FloatField()
+
+    db.close_connection()
 # ------------------------------------------------------------------------------------------------------------
 
 
