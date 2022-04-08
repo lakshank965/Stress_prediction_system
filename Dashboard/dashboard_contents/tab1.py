@@ -18,55 +18,101 @@ content = [
                     dbc.Col(
                         dbc.Card(
                             [
-                                dbc.CardHeader("Card header"),
+                                # dbc.CardHeader("Card header"),
                                 dbc.CardBody(
                                     [
-                                        html.H5("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some card content that we'll reuse",
-                                            className="card-text",
-                                        ),
-                                    ]
+                                        dcc.Graph(id="pie_chart1"),
+                                    ], style={"padding": "0px"}
                                 ),
-                            ], color="primary", inverse=True
+                            ],
                         )
                     ),
 
                     dbc.Col(
                         dbc.Card(
                             [
-                                dbc.CardHeader("Card header"),
+                                # dbc.CardHeader("Card header"),
                                 dbc.CardBody(
                                     [
-                                        html.H5("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some card content that we'll reuse",
-                                            className="card-text",
-                                        ),
-                                    ]
+                                        dcc.Graph(id="pie_chart2"),
+                                    ], style={"padding": "0px"}
                                 ),
-                            ], color="primary", inverse=True
+                            ],#color="primary", inverse=True
                         )
                     ),
 
                     dbc.Col(
                         dbc.Card(
                             [
-                                dbc.CardHeader("Card header"),
+                                # dbc.CardHeader("Card header"),
                                 dbc.CardBody(
                                     [
-                                        html.H5("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some card content that we'll reuse",
-                                            className="card-text",
-                                        ),
-                                    ]
+                                        dcc.Graph(id="pie_chart3"),
+                                    ], style={"padding": "0px"}
                                 ),
-                            ], color="primary", inverse=True
+                            ], #color="primary", inverse=True
                         )
                     ),
-                ], className="mb-4",
-            ),  # Row 1 end --------------------------------------------------------
+
+                    dbc.Col(
+                        dbc.Card(
+                            [
+                                # dbc.CardHeader("Card header"),
+                                dbc.CardBody(
+                                    [
+                                        dcc.Graph(id="pie_chart4"),
+                                    ], style={"padding": "0px"}
+                                ),
+                            ], #color="primary", inverse=True
+                        )
+                    ),
+
+
+                # ], className="mb-4",
+            # ),  # Row 1 end --------------------------------------------------------
+
+            # dbc.Row(
+            #     [
+                    dbc.Col(
+                        dbc.Card(
+                            [
+                                # dbc.CardHeader("Card header"),
+                                dbc.CardBody(
+                                    [
+                                        dcc.Graph(id="pie_chart5"),
+                                    ], style={"padding": "0px"}
+                                ),
+                            ], #color="primary", inverse=True
+                        )
+                    ),
+
+                    dbc.Col(
+                        dbc.Card(
+                            [
+                                # dbc.CardHeader("Card header"),
+                                dbc.CardBody(
+                                    [
+                                        dcc.Graph(id="pie_chart6"),
+                                    ], style={"padding": "0px"}
+                                ),
+                            ], #color="primary", inverse=True
+                        )
+                    ),
+
+                    dbc.Col(
+                        dbc.Card(
+                            [
+                                # dbc.CardHeader("Card header"),
+                                dbc.CardBody(
+                                    [
+                                        dcc.Graph(id="pie_chart7"),
+                                    ], style={"padding": "0px"}
+                                ),
+                            ], #color="primary", inverse=True
+                        )
+                    ),
+                ],  style={"display": "flex"}
+            ),
 
             # Row 2 start ----------------------------------------------------------
             dbc.Row(
@@ -74,13 +120,13 @@ content = [
                     dbc.Col(
                         dbc.Card(
                             [
-                                dbc.CardHeader("Card header"),
+                                # dbc.CardHeader("Card header"),
                                 dbc.CardBody(
                                     [
                                         dcc.Graph(id="line_graph"),
                                     ]
                                 ),
-                            ], color="primary", inverse=True
+                            ], #color="primary", inverse=True
                         )
                     ),
                 ], className="mb-4",
