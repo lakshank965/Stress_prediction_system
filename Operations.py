@@ -29,30 +29,31 @@ class FaceEmotionTracking(Document):
     """ face_emotion_tracking collection document defining"""
     # connection_URI = "mongodb+srv://face-emotion-tracking:Nzvy38zLtRAGqXuQ@spm-cluster.g8ddv.mongodb.net/spmdb?retryWrites=true&w=majority"
     # connect(host=connection_URI)
-    db = Database("face-emotion-tracking", "Nzvy38zLtRAGqXuQ")
-    db.make_connection()
+
+    # db = Database("face-emotion-tracking", "Nzvy38zLtRAGqXuQ")
+    # db.make_connection()
 
     date = DateTimeField(default=datetime.date.today())
     emp_id = StringField(required=True, unique=False, max_length=40, index=True)
     emotion = StringField(required=True, unique=False)
 
-    db.close_connection()
+    # db.close_connection()
 
 
 class Employees(Document):
-    db = Database('find-user-type', 'PAvO0FAVjc4KXkiE')
-    db.make_connection()
+    # db = Database('find-user-type', 'PAvO0FAVjc4KXkiE')
+    # db.make_connection()
 
     emp_id = StringField(required=True, unique=True, max_length=40, index=False)
     status = StringField(required=True, unique=False, max_length=20, index=False)
     email = EmailField(required=True, unique=True)
 
-    db.close_connection()
+    # db.close_connection()
 
 
 class Predictions(Document):
-    db = Database('predictions-write','hcLSaL51IP3VgRGH')
-    db.make_connection()
+    # db = Database('predictions-write','hcLSaL51IP3VgRGH')
+    # db.make_connection()
 
     date = DateTimeField(default=datetime.date.today())
     emp_id = StringField(required=True, unique=False, max_length=40, index=True)
@@ -60,11 +61,11 @@ class Predictions(Document):
     emo_percentages = DictField()
     stress_percentage = FloatField()
 
-    db.close_connection()
+    # db.close_connection()
 
 class DailyPredictions(Document):
-    db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
-    db.make_connection()
+    # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
+    # db.make_connection()
 
     date = DateTimeField(default=datetime.date.today())
     # date = StringField(required=True, unique=True)
@@ -72,7 +73,7 @@ class DailyPredictions(Document):
     all_emo_percentages = DictField()
     average_stress_percentage = FloatField()
 
-    db.close_connection()
+    # db.close_connection()
 # ------------------------------------------------------------------------------------------------------------
 
 
@@ -88,8 +89,8 @@ class DailyPredictions(Document):
 
 def find_user_type(emp):
     """finding user status in company"""
-    db = Database('find-user-type', 'PAvO0FAVjc4KXkiE')
-    db.make_connection()
+    # db = Database('find-user-type', 'PAvO0FAVjc4KXkiE')
+    # db.make_connection()
     employee = Employees.objects(emp_id=emp).first()
 
     if employee:
@@ -98,7 +99,7 @@ def find_user_type(emp):
         else:
             status = "manager"
 
-    db.close_connection()
+    # db.close_connection()
     # db = connect_db('find-user-type', 'PAvO0FAVjc4KXkiE')
     # collection = db["users"]  # users data
     # user_result = collection.find({"emp_id": emp_id})
