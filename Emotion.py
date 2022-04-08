@@ -80,7 +80,7 @@ def save_emotion(username, predict_emotion, date):
     return "emotion saved!"
 
 
-for d in range(14, 21):
+for d in range(6, 31):
     for i in range(50):
         emotions = ['Anger', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
         employee = ['emp001', 'emp002', 'emp003', 'emp004', 'emp005']
