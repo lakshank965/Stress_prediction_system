@@ -35,26 +35,26 @@ def find_emotion(image_array, face_box):
     # img = array_to_img(cropped_image)
     # ---------------------------------------------------------------------------------------------------
 
-    # img = tf.image.rgb_to_grayscale(cropped_image)
-    new_image_array = img_to_array(cropped_image)
+    img = tf.image.rgb_to_grayscale(cropped_image)
+    new_image_array = img_to_array(img)
 
     new_image_array = cv2.resize(new_image_array, (48, 48))
-    reshape_new_image_array = new_image_array.reshape(1, 48, 48, 3)
+    reshape_new_image_array = new_image_array.reshape(1, 48, 48, 1)
 
-    model = load_model("models/FERmodified_net5.hdf5")
+    model = load_model("models/FERmodified_net3.hdf5")
     prediction = model.predict(reshape_new_image_array)
     print(prediction)
 
     for i in range(0, len(prediction[0])):
         # print(prediction[0][i])
         if predict_value < prediction[0][i]:
+            # print(f'pred --- i ---- {prediction[0][i]}')
             predict_value = prediction[0][i]
-            print(f'prediction_value = {predict_value}')
-
+            # print(f'prediction_value = {predict_value}')
             predict_emotion = emotions[i]
 
-            print(f'predicted emotion is {predict_emotion}')
-            return predict_emotion
+    print(f'predicted emotion is {predict_emotion}')
+    return predict_emotion
 
 
 # ------------------------------------------------------------------------------------------
@@ -80,11 +80,11 @@ def save_emotion(username, predict_emotion, date):
     return "emotion saved!"
 
 
-for d in range(6, 31):
-    for i in range(50):
-        emotions = ['Anger', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
-        employee = ['emp001', 'emp002', 'emp003', 'emp004', 'emp005']
-        shuffle(emotions)
-        shuffle(employee)
-        date = f'2022-03-{d}'
-        save_emotion(employee[0], emotions[0], date)
+# for d in range(6, 31):
+#     for i in range(50):
+#         emotions = ['Anger', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
+#         employee = ['emp001', 'emp002', 'emp003', 'emp004', 'emp005']
+#         shuffle(emotions)
+#         shuffle(employee)
+#         date = f'2022-03-{d}'
+#         save_emotion(employee[0], emotions[0], date)
