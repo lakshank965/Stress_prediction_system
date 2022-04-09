@@ -89,8 +89,8 @@ class DailyPredictions(Document):
 
 def find_user_type(emp):
     """finding user status in company"""
-    # db = Database('find-user-type', 'PAvO0FAVjc4KXkiE')
-    # db.make_connection()
+    db = Database('find-user-type', 'PAvO0FAVjc4KXkiE')
+    db.make_connection()
     employee = Employees.objects(emp_id=emp).first()
 
     if employee:
@@ -99,7 +99,7 @@ def find_user_type(emp):
         else:
             status = "manager"
 
-    # db.close_connection()
+    db.close_connection()
     # db = connect_db('find-user-type', 'PAvO0FAVjc4KXkiE')
     # collection = db["users"]  # users data
     # user_result = collection.find({"emp_id": emp_id})
