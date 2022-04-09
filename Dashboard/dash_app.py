@@ -8,8 +8,8 @@ import dash_bootstrap_components as dbc
 from dash import Output, Input
 import plotly.express as px
 
-from dashboard_contents import tab1
-from Operations import Database, DailyPredictions, Employees
+from dashboard_contents import tab1, tab2
+from Operations import Database, DailyPredictions, Employees, Predictions
 from Predictions import make_predictions, write_predictions
 
 
@@ -29,22 +29,29 @@ dashboard = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])  # 
 # dashboard layout start ------------------------------------------------------------------------------------------------
 dashboard.layout = dbc.Container(
     [
-        html.H1('Hello, World!'),
-
-        dbc.Button("Update Dashboard", id='update_button', color="primary", className="me-1"),
+        dbc.NavbarSimple(
+            [
+                dbc.NavItem(
+                    [
+                        dbc.Button("Update Dashboard", id='update_button', color="success", className="me-1"),
+                        dbc.Button("Logout", id='logout_button', color="warning", className="me-1"),
+                    ]
+                ),
+            ], brand="Employee stress predictor", color="primary", dark=True,
+        ),
 
         # dbc.Alert(id='update_alert', is_open=True, duration=15000),
         dbc.Alert(id='update_alert', is_open=True),
 
         dbc.Tabs(
             [
-                dbc.Tab(tab1.content, id='tab1', label='Current Analyze', activeTabClassName='fw-bold'),
+                dbc.Tab(tab1.content, id='tab1', label='All Analyze', activeTabClassName='fw-bold'),
                 dbc.Tab(tab2.content, id='tab2', label='Employee Analyze', activeTabClassName='fw-bold'),
                 # dbc.Tab(tab1.content, id='tab3', label='third tab', activeTabClassName='fw-bold'),
             ]
-        )
+        ),
 
-        html.Br()
+
     ], id='container'
 )
 
@@ -52,7 +59,8 @@ dashboard.layout = dbc.Container(
 # callback functions ----------------------------------------------------------------------------------------------------
 
 @dashboard.callback(Output('update_alert', 'children'),
-                    Input('update_button', 'n_clicks'))
+                    Input('update_button', 'n_clicks')
+                    )
 def dashboard_update(update_button):
     db = Database('manager', 'zjlHHS5cNcCAT39C')
     db.make_connection()
@@ -71,7 +79,7 @@ def dashboard_update(update_button):
     #     date = f'2022-03-{d}'
 
     for employee in employees:
-        predictions = make_predictions('2022-03-30', employee)
+        predictions = make_predictions('2022-03-31', employee)
         print(write_predictions(predictions))
         # print(date)
 
@@ -116,7 +124,7 @@ def bar_chart(pie_chart7):
 @dashboard.callback(Output("pie_chart1", 'figure'),
                     Input('update_alert', 'children'))
 def pie_current(update_alert):
-    date = '2022-03-30'
+    date = '2022-03-05'
     # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
     # db.make_connection()
 
@@ -149,7 +157,7 @@ def pie_current(update_alert):
     fig1 = px.pie(df, values='percentage', hover_name='Emotion', hole=0.6, width=120, height=120)
 
     fig1.update_traces(textfont_size=1,
-                      marker=dict(colors=['#00aaaa', '#ffffff'], line=dict(color='rgba(0,170,170,0.3)', width=2)))
+                      marker=dict(colors=['#0000ee', '#ffffff'], line=dict(color='rgba(0,0,238,0.3)', width=2)))
 
     fig1.update_layout(title_text=data['Emotion'][0],
                       margin=dict(l=10, r=10, t=35, b=10),
@@ -161,7 +169,7 @@ def pie_current(update_alert):
 @dashboard.callback(Output("pie_chart2", 'figure'),
                     Input('pie_chart1', 'figure'))
 def pie_current(pie_chart1):
-    date = '2022-03-15'
+    date = '2022-03-05'
     # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
     # db.make_connection()
 
@@ -194,7 +202,7 @@ def pie_current(pie_chart1):
     fig2 = px.pie(df, values='percentage', hover_name='Emotion', hole=0.6, width=120, height=120)
 
     fig2.update_traces(textfont_size=1,
-                      marker=dict(colors=['#00aaaa', '#ffffff'], line=dict(color='rgba(0,170,170,0.3)', width=2)))
+                      marker=dict(colors=['#0000ee', '#ffffff'], line=dict(color='rgba(0,0,238,0.3)', width=2)))
 
     fig2.update_layout(title_text=data['Emotion'][0],
                       margin=dict(l=10, r=10, t=35, b=10),
@@ -206,7 +214,7 @@ def pie_current(pie_chart1):
 @dashboard.callback(Output("pie_chart3", 'figure'),
                     Input('pie_chart2', 'figure'))
 def pie_current(pie_chart2):
-    date = '2022-03-15'
+    date = '2022-03-05'
     # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
     # db.make_connection()
 
@@ -239,7 +247,7 @@ def pie_current(pie_chart2):
     fig3 = px.pie(df, values='percentage', hover_name='Emotion', hole=0.6, width=120, height=120)
 
     fig3.update_traces(textfont_size=1,
-                      marker=dict(colors=['#00aaaa', '#ffffff'], line=dict(color='rgba(0,170,170,0.3)', width=2)))
+                      marker=dict(colors=['#0000ee', '#ffffff'], line=dict(color='rgba(0,0,238,0.3)', width=2)))
 
     fig3.update_layout(title_text=data['Emotion'][0],
                       margin=dict(l=10, r=10, t=35, b=10),
@@ -251,7 +259,7 @@ def pie_current(pie_chart2):
 @dashboard.callback(Output("pie_chart4", 'figure'),
                     Input('pie_chart3', 'figure'))
 def pie_current(pie_chart3):
-    date = '2022-03-15'
+    date = '2022-03-05'
     # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
     # db.make_connection()
 
@@ -284,7 +292,7 @@ def pie_current(pie_chart3):
     fig4 = px.pie(df, values='percentage', hover_name='Emotion', hole=0.6, width=120, height=120)
 
     fig4.update_traces(textfont_size=1,
-                      marker=dict(colors=['#00aaaa', '#ffffff'], line=dict(color='rgba(0,170,170,0.3)', width=2)))
+                      marker=dict(colors=['#0000ee', '#ffffff'], line=dict(color='rgba(0,0,238,0.3)', width=2)))
 
     fig4.update_layout(title_text=data['Emotion'][0],
                       margin=dict(l=10, r=10, t=35, b=10),
@@ -295,7 +303,7 @@ def pie_current(pie_chart3):
 @dashboard.callback(Output("pie_chart5", 'figure'),
                     Input('pie_chart4', 'figure'))
 def pie_current(pie_chart4):
-    date = '2022-03-15'
+    date = '2022-03-05'
     # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
     # db.make_connection()
 
@@ -328,7 +336,7 @@ def pie_current(pie_chart4):
     fig5 = px.pie(df, values='percentage', hover_name='Emotion', hole=0.6, width=120, height=120)
 
     fig5.update_traces(textfont_size=1,
-                      marker=dict(colors=['#00aaaa', '#ffffff'], line=dict(color='rgba(0,170,170,0.3)', width=2)))
+                      marker=dict(colors=['#0000ee', '#ffffff'], line=dict(color='rgba(0,0,238,0.3)', width=2)))
 
     fig5.update_layout(title_text=data['Emotion'][0],
                       margin=dict(l=10, r=10, t=35, b=10),
@@ -340,7 +348,7 @@ def pie_current(pie_chart4):
 @dashboard.callback(Output("pie_chart6", 'figure'),
                     Input('pie_chart5', 'figure'))
 def pie_current(pie_chart5):
-    date = '2022-03-15'
+    date = '2022-03-05'
     # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
     # db.make_connection()
 
@@ -373,7 +381,7 @@ def pie_current(pie_chart5):
     fig6 = px.pie(df, values='percentage', hover_name='Emotion', hole=0.6, width=120, height=120)
 
     fig6.update_traces(textfont_size=1,
-                      marker=dict(colors=['#00aaaa', '#ffffff'], line=dict(color='rgba(0,170,170,0.3)', width=2)))
+                      marker=dict(colors=['#0000ee', '#ffffff'], line=dict(color='rgba(0,0,238,0.3)', width=2)))
 
     fig6.update_layout(title_text=data['Emotion'][0],
                       margin=dict(l=10, r=10, t=35, b=10),
@@ -385,7 +393,7 @@ def pie_current(pie_chart5):
 @dashboard.callback(Output("pie_chart7", 'figure'),
                     Input('pie_chart6', 'figure'))
 def pie_current(pie_chart6):
-    date = '2022-03-15'
+    date = '2022-03-05'
     # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
     # db.make_connection()
 
@@ -418,7 +426,7 @@ def pie_current(pie_chart6):
     fig7 = px.pie(df, values='percentage', hover_name='Emotion', hole=0.6, width=120, height=120)
 
     fig7.update_traces(textfont_size=1,
-                      marker=dict(colors=['#00aaaa', '#ffffff'], line=dict(color='rgba(0,170,170,0.3)', width=2)))
+                      marker=dict(colors=['#0000ee', '#ffffff'], line=dict(color='rgba(0,0,238,0.3)', width=2)))
 
     fig7.update_layout(title_text=data['Emotion'][0],
                       margin=dict(l=10, r=10, t=35, b=10),
@@ -427,6 +435,11 @@ def pie_current(pie_chart6):
     return fig7
 
 
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+# Tab2 callbacks
+
+
+
 # running the dashboard app
 if __name__ == '__main__':
-    dashboard.run_server(debug=True)
+    dashboard.run_server(debug=False)
