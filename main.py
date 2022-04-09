@@ -1,5 +1,7 @@
 import getpass
 
+from datetime import date
+
 from keras.preprocessing.image import array_to_img
 from Operations import find_user_type
 from HumanOrNot import HumanOrNot
@@ -31,7 +33,7 @@ if find_user_type(username) == "employee":  # check status of the user by using 
 
                 predict_emotion = find_emotion(human_image, face_box)
 
-                save_emotion(username, predict_emotion)
+                save_emotion(username, predict_emotion, date.today())
 
             else:
                 print("human detected..! But can not recognize emotion")
