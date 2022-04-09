@@ -10,8 +10,11 @@ from Operations import Database, Predictions
 
 # tab1 content design
 content = [
+    html.Br(),
     html.Div(
         [
+            html.H3('Current predicted emotions percentages'),
+            html.Br(),
             # Row 1 start----------------------------------------------------------
             dbc.Row(
                 [
@@ -114,6 +117,8 @@ content = [
                 ],  style={"display": "flex"}
             ),
 
+            html.Br(),
+            html.H3("All employees' average stress levels changing chart."),
             # Row 2 start ----------------------------------------------------------
             dbc.Row(
                 [
