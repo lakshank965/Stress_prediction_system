@@ -40,7 +40,7 @@ content = [
                                         dcc.Graph(id="pie_chart2"),
                                     ], style={"padding": "0px"}
                                 ),
-                            ],#color="primary", inverse=True
+                            ], #color="primary", inverse=True
                         )
                     ),
 

@@ -10,7 +10,7 @@ content = [
             dbc.Row(
                 [
                     dbc.Col(
-                        html.H5('Employee ID : ')
+                        html.H5('Employee ID : ', style={'display': 'flex', 'justify-content': 'flex-end'}),
                     ),
                     dbc.Col(
                         dcc.Dropdown(
