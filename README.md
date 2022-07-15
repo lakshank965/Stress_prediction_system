@@ -9,8 +9,7 @@ spend most of their time in front of a computer. Taking advantage of this, I dec
 an application to make predictions about a person's stress using Artificial Intelligence, just as 
 the human brain does. This AI agent seeks to apply Machine Learning and Image Processing 
 techniques to autonomous human facial emotion detection. The application is capable of 
-recognizing 8 facial expressions (Neutral, Happy, Sad, Surprise, Fear, Disgust, Anger, 
-Contempt). Accordingly, it predicts what mental state an employee was in most of the day.
+recognizing 7 facial expressions (***Neutral, Happy, Sad, Surprise, Fear, Disgust, Anger***). Accordingly, it predicts what mental state an employee was in most of the day.
 
 # User types
 
@@ -21,7 +20,7 @@ organization. Only managers have the ability to view reports with values calcula
 employee observation data. Therefore, the system identifies the category of users and access 
 privileges by category.
 
-# Why this type of system to a organization?
+# Why this type of system is important to an organization?
 
 Establishing such a system in an organization allows early detection of the mental health status 
 of employees, enabling managers to use their employees more effectively to achieve the 
@@ -50,7 +49,7 @@ This is make by using python libray that call
 
 ### Human facial emotion recognize AI.
 
-I have chosen two data set from <a href='https://www.kaggle.com/'>Kaggle </a> 
+I have chosen data set from <a href='https://www.kaggle.com/'>Kaggle </a> 
 to train this model,
 <ul>
 <li><a href='https://www.kaggle.com/datasets/msambare/fer2013'>FER-2013</a></li>
