@@ -1,17 +1,11 @@
-from Operations import Database, Predictions, DailyPredictions, FaceEmotionTracking
+from Operations import Predictions, DailyPredictions, FaceEmotionTracking
 
 
 # ----------------------------------------------------------------------------------------------------------------------
 def emotion_counts_find(date, emp_id, emotion):
-    # db = Database('face-emotion-counting', 'eIWnBiQ1eIQuwO97')
-    # db.make_connection()
-
     specific_emotion_count = FaceEmotionTracking.objects(date=date, emp_id=emp_id, emotion=emotion).count()
     all_emotion_count = FaceEmotionTracking.objects(date=date, emp_id=emp_id).count()
 
-    # specific_emotion_percentage = (specific_emotion_count / all_emotion_count) * 100.0
-
-    # db.close_connection()
     return specific_emotion_count, all_emotion_count
 
 
@@ -57,18 +51,11 @@ def make_predictions(date, emp_id):
 
 # ----------------------------------------------------------------------------------------------------------------------
 def write_predictions(predictions):
-    # db = Database('predictions-write', 'yBAGoHEuXurabm63')
-    # db.make_connection()
-
     data = Predictions.objects(date=predictions['date'], emp_id=predictions['emp_id']).first()
 
     if data:
         data.update(emo_counts=predictions['emo_counts'], emo_percentages=predictions['emo_percentages'],
                     stress_percentage=predictions['stress_percentage'])
-        # db.close_connection()
-
-        # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
-        # db.make_connection()
 
         daily_report = DailyPredictions.objects(date=predictions['date']).first()
         if daily_report:
@@ -129,11 +116,7 @@ def write_predictions(predictions):
             daily_pred.average_stress_percentage = average_stress_percentage
             daily_pred.save()
 
-        # db.close_connection()
-
     else:
-        # db = Database('predictions-write', 'yBAGoHEuXurabm63')
-        # db.make_connection()
 
         pred = Predictions()
         pred.date = predictions['date']
@@ -143,11 +126,6 @@ def write_predictions(predictions):
         pred.stress_percentage = predictions['stress_percentage']
         pred.save()
 
-        # db.close_connection()
-
-        # db = Database('daily-predictions', 'b1xvQn1CBeoBf2a6')
-        # db.make_connection()
-
         daily_report = DailyPredictions.objects(date=predictions['date']).first()
         if daily_report:
             all_emo_counts = {}
@@ -206,8 +184,6 @@ def write_predictions(predictions):
             daily_pred.all_emo_percentages = all_emo_percentages
             daily_pred.average_stress_percentage = average_stress_percentage
             daily_pred.save()
-
-        # db.close_connection()
 
     return 'predictions data updated.'
 # ----------------------------------------------------------------------------------------------------------------------

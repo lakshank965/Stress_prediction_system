@@ -1,6 +1,4 @@
 import cv2
-import datetime
-from datetime import date, time
 import numpy as np
 import tensorflow as tf
 
@@ -28,12 +26,6 @@ def find_emotion(image_array, face_box):
     emotions = ['Anger', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
     predict_value = 0.
-    # ---------------------------------------------------------------------------------------------------
-    # # img = save_img(cropped_image)
-    # path = 'AF34AFS.png'
-    # img = image.load_img(path, target_size=(72, 72), color_mode='rgb')
-    # img = array_to_img(cropped_image)
-    # ---------------------------------------------------------------------------------------------------
 
     img = tf.image.rgb_to_grayscale(cropped_image)
     new_image_array = img_to_array(img)
@@ -46,11 +38,8 @@ def find_emotion(image_array, face_box):
     print(prediction)
 
     for i in range(0, len(prediction[0])):
-        # print(prediction[0][i])
         if predict_value < prediction[0][i]:
-            # print(f'pred --- i ---- {prediction[0][i]}')
             predict_value = prediction[0][i]
-            # print(f'prediction_value = {predict_value}')
             predict_emotion = emotions[i]
 
     print(f'predicted emotion is {predict_emotion}')
@@ -62,16 +51,9 @@ def find_emotion(image_array, face_box):
 def save_emotion(username, predict_emotion, date):
     db = Database("face-emotion-tracking", "Nzvy38zLtRAGqXuQ")
     db.make_connection()
-    # current_time = datetime.datetime.now()
-    # year = current_time.year
-    # month = current_time.month
-    # day = current_time.day
-    # hour = current_time.hour
-    # minute = current_time.minute
     tracking_emotion = FaceEmotionTracking()
     tracking_emotion.emp_id = username
     tracking_emotion.emotion = predict_emotion
-    # tracking_emotion.date = date.today()
     tracking_emotion.date = date
     tracking_emotion.save()
 
@@ -80,6 +62,7 @@ def save_emotion(username, predict_emotion, date):
     return "emotion saved!"
 
 
+# This can use for add dummy data in database
 # for d in range(6, 31):
 #     for i in range(50):
 #         emotions = ['Anger', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']

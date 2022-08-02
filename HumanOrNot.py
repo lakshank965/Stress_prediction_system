@@ -13,7 +13,7 @@ class HumanOrNot:
         # Capture the video frame by frame
         ret, frame = self.vid.read()
 
-        # # Display the resulting frame
+        # # Display the resulting frame for development purpose
         # cv2.imshow('frame', frame)
         # # Frame wait two seconds
         # cv2.waitKey(2000)

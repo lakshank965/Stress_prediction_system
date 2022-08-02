@@ -25,8 +25,6 @@ if find_user_type(username) == "employee":  # check status of the user by using 
             print(f"confidence = {confidence}")
             print(f"face_box = {face_box}")
 
-            # confidence = mtcnn_values['confidence']
-
             if confidence >= 0.999:
                 human_image = detection[1]
                 print("human detected..! image pass to recognize emotion")
